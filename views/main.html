@@ -11,6 +11,34 @@
 <body>
     {{ .Title }}
     <div>hello world!</div>
+    <button id="my" class="btn btn-sm">
+        <div>fetch data</div>
+        <span id="my-loader" class="loading loading-sm loading-spinner text-primary hidden"></span>
+    </button>
+    <pre id="fetch-response">
+
+    </pre>
 </body>
+<script type="module">
+    document.addEventListener("DOMContentLoaded", () => {
+        async function fetchData() {
+            const response = await fetch("/data")
+            const data = await response.json();
+
+            console.log(data);
+        }
+        const btn = document.querySelector("#my");
+        const btnLoader = document.querySelector("#my-loader");
+
+        console.log(btn)
+        btn.addEventListener("click", async () => {
+            console.log("hello world!!")
+            btnLoader.classList.remove("hidden")
+            await fetchData()
+            btnLoader.classList.add("hidden")
+        })
+    })
+    console.log("hello world")
+</script>
 
 </html>

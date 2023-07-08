@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html/v2"
@@ -38,6 +39,13 @@ func main() {
 	})
 
 	app.Static("/public", "./public")
+
+	app.Get("/data", func(c *fiber.Ctx) error {
+		time.Sleep(3 * time.Second)
+		return c.JSON(fiber.Map{
+			"message": "Hello, World!",
+		})
+	})
 
 	if err := app.Listen(":4444"); err != nil {
 		panic(err.Error())

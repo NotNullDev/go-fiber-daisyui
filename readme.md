@@ -6,3 +6,6 @@ go run .
 ```
 
 Make a changes to the template and then reload the page to see the changes.
+
+to research:
+https://parceljs.org/
