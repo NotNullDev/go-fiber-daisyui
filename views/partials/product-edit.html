@@ -2,10 +2,10 @@
 <tr class="hover">
   <td>{{.Id}}</td>
   <td>
-    <input class="input input-sm input-bordered" value="{{.Name}}">
+    <input name="name" class="input input-sm input-bordered" value="{{.Name}}">
   </td>
   <td>
-    <input class="input input-sm input-bordered" value="{{.Price}}">
+    <input name="price" class="input input-sm input-bordered" value="{{.Price}}">
   </td>
   <td>
     <button
@@ -19,6 +19,10 @@
   <td>
     <button
       class="btn btn-sm btn-ghost"
+      hx-include="closest tr"
+      hx-put="/api/products/{{.Id}}"
+      hx-target="closest tr"
+      hx-swap="outerHTML"
     >Save
     </button>
   </td>

@@ -9,7 +9,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type CreateProductRequest struct {
+type ModifyProductRequest struct {
 	Name  string `json:"name"`
 	Price int    `json:"price"`
 }
@@ -25,7 +25,7 @@ func initApiEndpoints(app *fiber.App, db *sqlx.DB) {
 	})
 
 	apiGroup.Post("/products", func(c *fiber.Ctx) error {
-		var product CreateProductRequest
+		var product ModifyProductRequest
 		if err := c.BodyParser(&product); err != nil {
 			return err
 		}
@@ -42,19 +42,28 @@ func initApiEndpoints(app *fiber.App, db *sqlx.DB) {
 		}, "")
 	})
 
-	apiGroup.Put("/products", func(c *fiber.Ctx) error {
-		var product Product
+	apiGroup.Put("/products/:id", func(c *fiber.Ctx) error {
+		var product ModifyProductRequest
 		if err := c.BodyParser(&product); err != nil {
 			return err
 		}
 
-		err := UpdateProduct(db, product.Id, product.Name, product.Price)
+		id, err := c.ParamsInt("id", 0)
+		if err != nil {
+			return err
+		}
+
+		if id == 0 {
+			return errors.New("id must be greater than 0")
+		}
+
+		err = UpdateProduct(db, id, product.Name, product.Price)
 		if err != nil {
 			return err
 		}
 
 		return c.Render("partials/product", fiber.Map{
-			"Id":    product.Id,
+			"Id":    id,
 			"Name":  product.Name,
 			"Price": product.Price,
 		}, "")
