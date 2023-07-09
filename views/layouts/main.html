@@ -2,56 +2,61 @@
 <html lang="en" data-theme="night">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script> -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
-    <!-- {{ getCssAsset "app.css" }} -->
-    <!-- component library for tailwind -->
-    <!-- tailwind css-in-js -->
-    <!-- <script type="module" src="https://cdn.skypack.dev/twind/shim"></script> -->
-    <!-- <script type="module">
-        import { setup, silent } from 'https://cdn.skypack.dev/twind/shim'
-        import * as colors from 'https://cdn.skypack.dev/twind/colors'
 
-        console.log(colors);
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"></script> -->
 
-        setup({
-            mode: silent,
-            theme: {
-                extend: {
-                    colors
-                },
-            },
-        })
+  <!-- {{ getCssAsset "app.css" }} -->
+  <!-- component library for tailwind -->
+  <!-- tailwind css-in-js -->
+  <!-- <script type="module" src="https://cdn.skypack.dev/twind/shim"></script> -->
+  <!-- <script type="module">
+      import { setup, silent } from 'https://cdn.skypack.dev/twind/shim'
+      import * as colors from 'https://cdn.skypack.dev/twind/colors'
 
-    </script> -->
-    <!-- web component library -->
-    <!-- <script type="module" src="https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js"></script> -->
+      console.log(colors);
 
-    <!-- component library -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.2.1/dist/full.css" rel="stylesheet" type="text/css" />
-    <!-- html extension -->
-    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
-    <!-- tailwind css in js -->
-    <script src="https://cdn.twind.style" crossorigin></script>
-    <script src="https://cdn.twind.style/ext,line-clamp,forms,typography" crossorigin></script>
-    <script>
-        twind.install({})
-    </script>
+      setup({
+          mode: silent,
+          theme: {
+              extend: {
+                  colors
+              },
+          },
+      })
+
+  </script> -->
+  <!-- web component library -->
+  <link href="/lib/shared.css" rel="stylesheet">
+  <!-- <script type="module" src="https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js"></script> -->
+
+  <!-- component library -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.2.1/dist/full.css" rel="stylesheet" type="text/css"/>
+  <!-- html extension -->
+  <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+  <!-- tailwind css in js -->
+  <script src="https://cdn.twind.style" crossorigin></script>
+  <script src="https://cdn.twind.style/ext,line-clamp,forms,typography" crossorigin></script>
+  <script>
+    twind.install({
+      hash: false
+    })
+  </script>
 </head>
 
 <body hx-boost="true" class="min-h-screen flex flex-col">
-    {{ template "partials/header" .}}
-    {{ embed }}
-    {{ template "partials/footer" . }}
+{{ template "partials/header" .}}
+{{ embed }}
+{{ template "partials/footer" . }}
 </body>
 
 </html>

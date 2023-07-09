@@ -1,29 +1,39 @@
 {{- /*gotype: go-fullstack.Product*/ -}}
-<tr class="hover">
-  <td>{{.Id}}</td>
+<tr>
   <td>
-    <input name="name" class="input input-sm input-bordered" value="{{.Name}}">
+    <div class="p-2 flex items-center justify-center">{{.Id}}</div>
   </td>
   <td>
-    <input name="price" class="input input-sm input-bordered" value="{{.Price}}">
+    <div class="mx-4">
+      <input name="name" class="input input-sm input-bordered" value="{{.Name}}">
+    </div>
   </td>
   <td>
-    <button
-      class="btn btn-sm btn-ghost"
-      hx-get="/partials/product?id={{.Id}}"
-      hx-target="closest tr"
-      hx-swap="outerHTML"
-    >Cancel
-    </button>
+    <div class="mx-4">
+      <input type="number" min="1" name="price" class="input input-sm input-bordered" value="{{.Price}}">
+    </div>
   </td>
   <td>
-    <button
-      class="btn btn-sm btn-ghost"
-      hx-include="closest tr"
-      hx-put="/api/products/{{.Id}}"
-      hx-target="closest tr"
-      hx-swap="outerHTML"
-    >Save
-    </button>
+    <div class="flex items-center justify-center">
+      <button
+        class="btn btn-sm btn-ghost"
+        hx-get="/partials/product?id={{.Id}}"
+        hx-target="closest tr"
+        hx-swap="outerHTML"
+      >Cancel
+      </button>
+    </div>
+  </td>
+  <td>
+    <div class="flex items-center justify-center">
+      <button
+        class="btn btn-sm btn-ghost"
+        hx-include="closest tr"
+        hx-put="/api/products/{{.Id}}"
+        hx-target="closest tr"
+        hx-swap="outerHTML"
+      >Save
+      </button>
+    </div>
   </td>
 </tr>

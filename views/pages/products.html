@@ -17,18 +17,18 @@
   </form>
   <h1 class="my-3">Products</h1>
 
-  <table class="">
+  <table class="min-w-[70%] mx-auto  table table-zebra">
     <!-- head -->
     <thead>
-    <tr>
-      <th>Id</th>
+    <tr class="min-w-[100px] ">
+      <th style="width: 50px;">Id</th>
       <th>Name</th>
       <th>Price</th>
-      <th></th>
-      <th></th>
+      <th style="width: 150px;" colspan="1"></th>
+      <th style="width: 100px;" colspan="1"></th>
     </tr>
     </thead>
-    <tbody id="products-list">
+    <tbody id="products-list" class="">
     {{range .Products}}
         {{template "partials/product" .}}
     {{end}}
