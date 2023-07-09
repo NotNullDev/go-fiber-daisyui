@@ -88,4 +88,23 @@ func initApiEndpoints(app *fiber.App, db *sqlx.DB) {
 
 		return c.SendString("")
 	})
+
+	apiGroup.Post("/products/filter", func(ctx *fiber.Ctx) error {
+		filter := ctx.FormValue("filter", "")
+
+		var products []Product
+
+		if filter == "" {
+			products = GetAllProducts(db)
+		}
+
+		products, err := GetFilteredProducts(db, filter)
+		if err != nil {
+			return err
+		}
+
+		return ctx.Render("partials/filter-search-result", fiber.Map{
+			"Products": products,
+		}, "")
+	})
 }

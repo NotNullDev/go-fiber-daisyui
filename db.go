@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"strings"
 
@@ -69,6 +70,17 @@ func GetAllProducts(db *sqlx.DB) []Product {
 	}
 
 	return products
+}
+
+func GetFilteredProducts(db *sqlx.DB, filter string) ([]Product, error) {
+	var products []Product
+	filterParsed := fmt.Sprintf("%%%s%%", strings.TrimSpace(strings.ToLower(filter)))
+	err := db.Select(&products, "select * from products p where trim(lower(p.name)) like ?", filterParsed)
+	if err != nil {
+		return nil, err
+	}
+
+	return products, nil
 }
 
 func GetProductById(db *sqlx.DB, id int) (Product, error) {
