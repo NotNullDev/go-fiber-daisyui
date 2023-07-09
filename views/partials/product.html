@@ -1,0 +1,20 @@
+{{- /*gotype: go-fullstack.Product*/ -}}
+<tr class="hover">
+  <td>{{.Name}}</td>
+  <td>{{.Price}}</td>
+  <td>
+    <button
+      class="btn btn-sm btn-ghost"
+    >Edit
+    </button>
+  </td>
+  <td>
+    <button
+      class="btn btn-sm btn-ghost"
+      hx-delete="/api/products/{{.Id}}"
+      hx-target="closest tr"
+      hx-swap="outerHTML"
+    >Delete
+    </button>
+  </td>
+</tr>

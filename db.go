@@ -1,7 +1,9 @@
 package main
 
 import (
+	"errors"
 	"log"
+	"strings"
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/mattn/go-sqlite3"
@@ -23,12 +25,24 @@ func NewDb() *sqlx.DB {
 	return db
 }
 
-func AddProduct(db *sqlx.DB, name, price string) {
-	_, err := db.Exec("INSERT INTO products (name, price) VALUES (?, ?)", name, price)
+func AddProduct(db *sqlx.DB, name string, price int) (int, error) {
 
-	if err != nil {
-		log.Fatalln(err)
+	if strings.TrimSpace(name) == "" {
+		return 0, errors.New("name is empty")
 	}
+
+	if price == 0 {
+		return 0, errors.New("price must be greater than 0")
+	}
+
+	cursor, err := db.Exec("INSERT INTO products (name, price) VALUES (?, ?)", name, price)
+	if err != nil {
+		return 0, err
+	}
+
+	id, err := cursor.LastInsertId()
+
+	return int(id), err
 }
 
 func GetAllProducts(db *sqlx.DB) []Product {
@@ -41,6 +55,14 @@ func GetAllProducts(db *sqlx.DB) []Product {
 	}
 
 	return products
+}
+
+func GetProductById(db *sqlx.DB, id int) (Product, error) {
+	var product Product
+
+	err := db.Get(&product, "SELECT * FROM products WHERE id = ?", id)
+
+	return product, err
 }
 
 func deleteProduct(db *sqlx.DB, id int) error {

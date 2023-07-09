@@ -1,6 +1,10 @@
 create table products
 (
-  id    integer,
+  id    integer
+    constraint id
+      primary key
+    constraint products_pk
+      unique,
   name  text    not null,
   price integer not null
 );
@@ -13,3 +17,4 @@ create table sqlite_master
   rootpage INT,
   sql      TEXT
 );
+

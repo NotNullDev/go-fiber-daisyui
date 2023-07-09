@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/template/html/v2"
 )
 
@@ -45,8 +46,15 @@ func NewHtmlEngine() *html.Engine {
 }
 
 func NewApp(engine *html.Engine) *fiber.App {
-	return fiber.New(fiber.Config{
+	app := fiber.New(fiber.Config{
 		Views:       engine,
 		ViewsLayout: "layouts/main",
 	})
+
+	app.Use(recover.New(recover.Config{
+		EnableStackTrace: true,
+	}))
+
+	return app
+
 }
