@@ -5,6 +5,8 @@ go 1.20
 require (
 	github.com/gofiber/fiber/v2 v2.47.0
 	github.com/gofiber/template/html/v2 v2.0.4
+	github.com/jmoiron/sqlx v1.3.5
+	github.com/mattn/go-sqlite3 v1.14.16
 )
 
 require (

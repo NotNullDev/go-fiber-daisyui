@@ -9,3 +9,8 @@ Make a changes to the template and then reload the page to see the changes.
 
 to research:
 https://parceljs.org/
+https://twind.dev/usage-guides/lit-element.html
+https://twind.style/installation
+https://twind.style/installation#twind-cdn
+https://open-wc.org/
+https://github.com/go-jet/jet
