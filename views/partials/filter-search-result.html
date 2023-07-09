@@ -1,4 +1,7 @@
 {{range .Products}}
     {{- /*gotype: go-fullstack.Product*/ -}}
-    <li id="{{.Id}}"><a>{{.Name}}</a></li>
+    <li
+      id="search-result-{{.Id}}"
+      hx-on="click: insertSearchResult('{{.Id}}')"
+      class="filter-search-result"><a>{{.Name}}</a></li>
 {{end}}

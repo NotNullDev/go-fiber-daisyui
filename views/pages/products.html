@@ -17,9 +17,10 @@
   </form>
   <h1 class="my-3">Products</h1>
 
-  <div class="dropdown">
+  <div class="dropdown" id="filter-search-result-dropdown">
     <label tabindex="0" class="">
       <input
+        id="filter-search-input"
         class="input input-sm input-bordered" type="search" placeholder="Filter by name"
         name="filter"
         hx-trigger="keyup changed delay:500ms, search"
@@ -53,3 +54,19 @@
     </tbody>
   </table>
 </div>
+<script>
+  /**
+   * @param {string} elementId
+   */
+  function insertSearchResult(elementId) {
+    const searchInput = document.querySelector("#filter-search-input");
+    const searchResult = document.querySelector("#filter-search-result");
+    const htmlElement = document.querySelector(`#search-result-${elementId}`);
+    if (!searchInput) {
+      console.error("search input not found");
+      return;
+    }
+    searchInput.value = htmlElement.innerText;
+    searchResult.hidden = true;
+  }
+</script>
