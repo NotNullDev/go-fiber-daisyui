@@ -45,6 +45,20 @@ func AddProduct(db *sqlx.DB, name string, price int) (int, error) {
 	return int(id), err
 }
 
+func UpdateProduct(db *sqlx.DB, id int, name string, price int) error {
+	if strings.TrimSpace(name) == "" {
+		return errors.New("name is empty")
+	}
+
+	if price == 0 {
+		return errors.New("price must be greater than 0")
+	}
+
+	_, err := db.Exec("UPDATE products SET name = ?, price = ? WHERE id = ?", name, price, id)
+
+	return err
+}
+
 func GetAllProducts(db *sqlx.DB) []Product {
 	var products []Product
 

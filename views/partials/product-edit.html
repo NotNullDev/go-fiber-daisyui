@@ -1,10 +1,18 @@
 {{- /*gotype: go-fullstack.Product*/ -}}
 <tr class="hover">
-  <td>{{.Name}}</td>
-  <td>{{.Price}}</td>
+  <td>{{.Id}}</td>
+  <td>
+    <input class="input input-sm input-bordered" value="{{.Name}}">
+  </td>
+  <td>
+    <input class="input input-sm input-bordered" value="{{.Price}}">
+  </td>
   <td>
     <button
       class="btn btn-sm btn-ghost"
+      hx-get="/partials/product?id={{.Id}}"
+      hx-target="closest tr"
+      hx-swap="outerHTML"
     >Cancel
     </button>
   </td>

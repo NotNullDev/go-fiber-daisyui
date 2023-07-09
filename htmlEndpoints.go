@@ -30,7 +30,7 @@ func initHtmlEndpoints(app *fiber.App, db *sqlx.DB) {
 		})
 	})
 
-	app.Get("/partials/products-edit", func(ctx *fiber.Ctx) error {
+	app.Get("/partials/product-edit", func(ctx *fiber.Ctx) error {
 		id := ctx.QueryInt("id", 0)
 
 		if id == 0 {
@@ -42,10 +42,29 @@ func initHtmlEndpoints(app *fiber.App, db *sqlx.DB) {
 			return ctx.Render(ErrorTemplateName, nil, "")
 		}
 
-		return ctx.Render("partials/products-edit", fiber.Map{
+		return ctx.Render("partials/product-edit", fiber.Map{
 			"Id":    byId.Id,
 			"Name":  byId.Name,
 			"Price": byId.Price,
-		})
+		}, "")
+	})
+
+	app.Get("/partials/product", func(ctx *fiber.Ctx) error {
+		id := ctx.QueryInt("id", 0)
+
+		if id == 0 {
+			return ctx.Render(ErrorTemplateName, nil, "")
+		}
+
+		byId, err := GetProductById(db, id)
+		if err != nil {
+			return ctx.Render(ErrorTemplateName, nil, "")
+		}
+
+		return ctx.Render("partials/product", fiber.Map{
+			"Id":    byId.Id,
+			"Name":  byId.Name,
+			"Price": byId.Price,
+		}, "")
 	})
 }

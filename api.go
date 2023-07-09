@@ -42,6 +42,24 @@ func initApiEndpoints(app *fiber.App, db *sqlx.DB) {
 		}, "")
 	})
 
+	apiGroup.Put("/products", func(c *fiber.Ctx) error {
+		var product Product
+		if err := c.BodyParser(&product); err != nil {
+			return err
+		}
+
+		err := UpdateProduct(db, product.Id, product.Name, product.Price)
+		if err != nil {
+			return err
+		}
+
+		return c.Render("partials/product", fiber.Map{
+			"Id":    product.Id,
+			"Name":  product.Name,
+			"Price": product.Price,
+		}, "")
+	})
+
 	apiGroup.Delete("/products/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id")
 
